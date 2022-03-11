@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Incidencia index{% endblock %}
+
+{% block body %}
+    <h1>Incidencia index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Titulo</th>
+                <th>Fecha</th>
+                <th>Estado</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for incidencium in incidencias %}
+            <tr>
+                <td>{{ incidencium.id }}</td>
+                <td>{{ incidencium.titulo }}</td>
+                <td>{{ incidencium.fecha ? incidencium.fecha|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ incidencium.estado }}</td>
+                <td>
+                    <a href="{{ path('app_incidencia_show', {'id': incidencium.id}) }}">show</a>
+                    <a href="{{ path('app_incidencia_edit', {'id': incidencium.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_incidencia_new') }}">Create new</a>
+{% endblock %}
