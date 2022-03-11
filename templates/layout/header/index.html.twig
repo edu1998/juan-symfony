@@ -1,0 +1,19 @@
+<div class="toolbar">
+    <div class="container">
+        <div>
+            <a class="toolbar-link" href="/cliente">Clientes</a>
+        </div>
+        <div>
+            <a class="toolbar-link" href="">Incidencias</a>
+        </div>
+        {% if name_user != '' %}
+            <div>
+                <a class="toolbar-link" href="/logout">Cerrar sesion</a>
+            </div>
+            <div>
+                {{ name_user }}
+            </div>
+        {%  endif %}
+    </div>
+</div>
+<br/><br/>

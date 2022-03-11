@@ -1,0 +1,36 @@
+{# templates/login/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{# ... #}
+
+{% block body %}
+    {{ include('layout/header/index.html.twig') }}
+    <div>
+        <h2>Login</h2>
+    </div>
+    <form action="{{ path('login') }}" method="post">
+        <label for="username">Email:</label>
+        <input type="text" id="username" name="_username" value="{{ last_username }}"/>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="_password"/>
+
+        <label>
+            <input type="checkbox" name="_remember_me" checked/>
+            Recordar usuario
+        </label>
+
+        {# If you want to control the URL the user is redirected to on success#}
+        <input type="hidden" name="_target_path" value="/cliente"/>
+
+        <button type="submit">login</button>
+    </form>
+    {% if error %}
+        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+    <div>
+        <a href="register">
+            <h4 style="color: blue">Registrarme</h4>
+        </a>
+    </div>
+{% endblock %}

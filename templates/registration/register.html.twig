@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    {{ include('layout/header/index.html.twig') }}
+    <h1>Register</h1>
+    {{ form(registrationForm) }}
+    <div>
+        <a href="login">
+            <h4 style="color: blue">Login</h4>
+        </a>
+    </div>
+{% endblock %}

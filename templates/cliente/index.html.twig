@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Clientes{% endblock %}
+
+{% block body %}
+    {{ include('layout/header/index.html.twig') }}
+    <div>
+        <h2>Modulo de clientes</h2>
+    </div>
+
+    <div class="client-list">
+        <ul>
+            <li>eduardo tordecilla paez</li>
+        </ul>
+    </div>
+
+    <div>
+        <button>
+            <a href="cliente/registro"> registrar cliente </a>
+        </button>
+    </div>
+
+{% endblock %}

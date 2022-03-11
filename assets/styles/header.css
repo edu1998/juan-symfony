@@ -1,0 +1,28 @@
+.toolbar{
+    position: fixed;
+    width: 100%;
+    height: 50px;
+    top: 0px;
+    right: 0px;
+    background-color: #B0413E;
+    color: #5eb5e0;
+    font-size: 18px;
+}
+
+.container {
+    padding-right: 30px;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 30px;
+}
+
+.toolbar-link {
+    text-decoration: none;
+    color: #5eb5e0;
+}
+
+.user-name {
+    border-left: solid 1px black;
+}

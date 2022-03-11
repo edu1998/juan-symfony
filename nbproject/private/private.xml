@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/xampp/htdocs/Symfony/ServicioTecnicoFINAL-Symfony/src/Entity/Cliente.php</file>
+            <file>file:/C:/xampp/htdocs/Symfony/ServicioTecnicoFINAL-Symfony/.env</file>
+            <file>file:/C:/xampp/htdocs/Symfony/ServicioTecnicoFINAL-Symfony/src/Entity/Incidencia.php</file>
+            <file>file:/C:/xampp/htdocs/Symfony/ServicioTecnicoFINAL-Symfony/src/Entity/Usuario.php</file>
+            <file>file:/C:/xampp/htdocs/Symfony/ServicioTecnicoFINAL-Symfony/src/index.php</file>
+            <file>file:/C:/xampp/htdocs/Symfony/ServicioTecnicoFINAL-Symfony/src/Controller/RegistrationController.php</file>
+            <file>file:/C:/xampp/htdocs/Symfony/ServicioTecnicoFINAL-Symfony/templates/registration/register.html.twig</file>
+        </group>
+    </open-files>
+</project-private>
