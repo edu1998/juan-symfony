@@ -18,11 +18,11 @@ class Cliente
     #[ORM\Column(type: 'string', length: 50)]
     private $nombre;
 
-    #[ORM\Column(type: 'string', length: 12, nullable: true)]
-    private $telefono;
-
     #[ORM\Column(type: 'string', length: 250, nullable: true)]
     private $apellido;
+
+    #[ORM\Column(type: 'string', length: 12, nullable: true)]
+    private $telefono;
 
     #[ORM\Column(type: 'string', length: 250, nullable: true)]
     private $direccion;
@@ -33,6 +33,10 @@ class Cliente
     public function __construct()
     {
         $this->incidencias = new ArrayCollection();
+    }
+
+    public function __toString() {
+        return $this->nombre;
     }
 
 

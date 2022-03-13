@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Incidencia;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -13,10 +14,14 @@ class IncidenciaType extends AbstractType
     {
         $builder
             ->add('titulo')
-            ->add('fecha')
-            ->add('estado')
+            ->add('estado', ChoiceType::class, [
+                'choices' => [
+                    'Iniciada' => 'iniciada',
+                    'En proceso' => 'en proceso',
+                    'Resuelta' => 'Resuelta',
+                ]
+            ])
             ->add('cliente')
-            ->add('usuario')
         ;
     }
 

@@ -5,11 +5,14 @@
 {% block body %}
     {{ include('layout/header/index.html.twig') }}
     <div>
-        <h2>Modulo de clientes</h2>
+        <h1>MODULO DE CLIENTES</h1>
+    </div>
+    <div>
+        <h2>Registrar cliente</h2>
     </div>
 
-    <form>
+    {{ form(registerForm) }}
 
-    </form>
+    <a href="{{ path('cliente') }}">Regresar</a>
 
 {% endblock %}

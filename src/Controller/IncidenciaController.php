@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Incidencia;
+use App\Entity\Usuario;
 use App\Form\IncidenciaType;
 use App\Repository\IncidenciaRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,11 +18,12 @@ class IncidenciaController extends AbstractController
     public function index(IncidenciaRepository $incidenciaRepository): Response
     {
         return $this->render('incidencia/index.html.twig', [
+            'name_user'  => $this->getNameUser(),
             'incidencias' => $incidenciaRepository->findAll(),
         ]);
     }
 
-    #[Route('/new', name: 'app_incidencia_new', methods: ['GET', 'POST'])]
+    #[Route('/registro', name: 'app_incidencia_new', methods: ['GET', 'POST'])]
     public function new(Request $request, IncidenciaRepository $incidenciaRepository): Response
     {
         $incidencium = new Incidencia();
@@ -29,12 +31,14 @@ class IncidenciaController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $incidencium->setFecha(new \DateTime());
+            $incidencium->setUsuario($this->getCurrentUser());
             $incidenciaRepository->add($incidencium);
             return $this->redirectToRoute('app_incidencia_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('incidencia/new.html.twig', [
-            'incidencium' => $incidencium,
+            'name_user'  => $this->getNameUser(),
             'form' => $form,
         ]);
     }
@@ -47,30 +51,54 @@ class IncidenciaController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_incidencia_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Incidencia $incidencium, IncidenciaRepository $incidenciaRepository): Response
+    #[Route('/{id}/edit/{id_cliente}', name: 'app_incidencia_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, Incidencia $incidencium, IncidenciaRepository $incidenciaRepository, string $id_cliente): Response
     {
         $form = $this->createForm(IncidenciaType::class, $incidencium);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $incidenciaRepository->add($incidencium);
-            return $this->redirectToRoute('app_incidencia_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('cliente_detail', ['id' => $id_cliente], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('incidencia/edit.html.twig', [
+            'name_user'  => $this->getNameUser(),
             'incidencium' => $incidencium,
             'form' => $form,
         ]);
     }
 
-    #[Route('/{id}', name: 'app_incidencia_delete', methods: ['POST'])]
-    public function delete(Request $request, Incidencia $incidencium, IncidenciaRepository $incidenciaRepository): Response
+    #[Route('/{id}/{id_cliente}', name: 'app_incidencia_delete', methods: ['POST'])]
+    public function delete(Request $request, Incidencia $incidencium, IncidenciaRepository $incidenciaRepository, string $id_cliente): Response
     {
         if ($this->isCsrfTokenValid('delete'.$incidencium->getId(), $request->request->get('_token'))) {
             $incidenciaRepository->remove($incidencium);
         }
 
-        return $this->redirectToRoute('app_incidencia_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('cliente_detail', ['id' => $id_cliente], Response::HTTP_SEE_OTHER);
+    }
+
+    private function getNameUser(): string {
+        if($this->getUser()) {
+            $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+            /** @var Usuario $user */
+            $user = $this->getUser();
+            if($user?->getId()) {
+                return $user->getNombre() . ' ' . $user->getApellido();
+            }
+        }
+        return '';
+    }
+
+    private function getCurrentUser() {
+        if($this->getUser()) {
+            $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+            /** @var Usuario $user */
+            $user = $this->getUser();
+            if($user?->getId()) {
+               return $user;
+            }
+        }
     }
 }

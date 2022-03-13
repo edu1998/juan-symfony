@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Detalle del cliente{% endblock %}
+
+{% block body %}
+    {{ include('layout/header/index.html.twig') }}
+    <div>
+        <h1>MODULO DE CLIENTES</h1>
+    </div>
+    <div>
+        <h2>Detalle del cliente</h2>
+    </div>
+
+    <div style="font-size: 18px">
+        <div><span style="font-weight: bold">id:</span> <span>{{ cliente.id }} </span></div>
+        <div><span style="font-weight: bold">Nombre:</span> <span>{{ cliente.nombre }} </span></div>
+        <div><span style="font-weight: bold">Apellido:</span> <span>{{ cliente.apellido }} </span></div>
+        <div><span style="font-weight: bold">Telefono:</span> <span>{{ cliente.telefono }} </span></div>
+        <div><span style="font-weight: bold">Direccion:</span> <span>{{ cliente.direccion }} </span></div>
+    </div>
+    <br/>
+    <div>
+        <div>
+            <span style="font-size: 18px; font-weight: bold">Incidencias</span>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th style="text-align: start">Titulo</th>
+                    <th style="text-align: start">Fecha</th>
+                    <th style="text-align: start">Estado</th>
+                    <th style="text-align: start">Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for incidencia in cliente.incidencias %}
+                    <tr>
+                        <td>{{ incidencia.titulo }}</td>
+                        <td>{{ incidencia.fecha ? incidencia.fecha|date('Y-m-d H:i:s') : '' }}</td>
+                        <td>{{ incidencia.estado }}</td>
+                        <td style="display: flex">
+                            <form method="post" action="{{ path('app_incidencia_delete', {'id': incidencia.id, 'id_cliente': cliente.id }) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ incidencia.id) }}">
+                                <button class="btn">Borrar</button>
+                            </form><br/>
+                            <button>
+                                <a style="text-decoration: none; color: black" href="{{ path('app_incidencia_edit', {'id': incidencia.id, 'id_cliente': cliente.id}) }}"> editar </a>
+                            </button>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="5">No hay Incidencias registradas</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <br/>
+            <button>
+                <a style="text-decoration: none; color: black"> Añadir incidencia </a>
+            </button>
+        </div>
+    </div>
+    <br>
+    <a href="{{ path('cliente') }}">Regresar</a>
+{% endblock %}
