@@ -53,6 +53,7 @@ class ClienteController extends AbstractController
 
     #[Route('/cliente/borrar/{id}', name: 'cliente_borrar', methods: ['POST'])]
     public function borrar(Request $request, Cliente $cliente, ClienteRepository $clienteRepository) {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         if ($this->isCsrfTokenValid('delete'.$cliente->getId(), $request->request->get('_token'))) {
             $clienteRepository->remove($cliente);
         }

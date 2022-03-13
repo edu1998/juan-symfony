@@ -11,8 +11,12 @@
         <h2>Registro de incidencias</h2>
     </div>
 
-    {{ include('incidencia/_form.html.twig') }}
+    {{ include('incidencia/_form.html.twig', {'button_label': 'Guardar'})}}
 
     <br/>
+    {% if client_id is defined %}
+    <a href="{{ path('cliente_detail', {'id': client_id }) }}">Regresar</a>
+    {% else %}
     <a href="{{ path('app_incidencia_index') }}">Regresar</a>
+    {% endif %}
 {% endblock %}

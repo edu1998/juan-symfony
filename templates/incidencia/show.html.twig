@@ -3,32 +3,53 @@
 {% block title %}Incidencia{% endblock %}
 
 {% block body %}
-    <h1>Incidencia</h1>
+    {{ include('layout/header/index.html.twig') }}
+    <div>
+        <h1>MODULO DE INCIDENCIAS</h1>
+    </div>
+    <div>
+        <h2>Detalle de incidencia</h2>
+    </div>
 
     <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
+        <tbody >
+            <tr >
+                <th style="text-align: start">Id</th>
                 <td>{{ incidencium.id }}</td>
             </tr>
             <tr>
-                <th>Titulo</th>
+                <th style="text-align: start">Titulo</th>
                 <td>{{ incidencium.titulo }}</td>
             </tr>
             <tr>
-                <th>Fecha</th>
+                <th style="text-align: start">Fecha</th>
                 <td>{{ incidencium.fecha ? incidencium.fecha|date('Y-m-d H:i:s') : '' }}</td>
             </tr>
             <tr>
-                <th>Estado</th>
+                <th style="text-align: start">Estado</th>
                 <td>{{ incidencium.estado }}</td>
             </tr>
         </tbody>
     </table>
+    <h4>Cliente</h4>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th style="text-align: start">Nombre</th>
+                <td>{{ incidencium.cliente.nombre }} {{ incidencium.cliente.apellido }}</td>
+            </tr>
+            <tr>
+                <th style="text-align: start">Telefono</th>
+                <td>{{ incidencium.cliente.telefono }}</td>
+            </tr>
+            <tr>
+                <th style="text-align: start">Direccion</th>
+                <td>{{ incidencium.cliente.Direccion }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <h4>Creada por el usuario: {{ incidencium.usuario.nombre }} {{ incidencium.usuario.apellido }}</h4>
+    <br/>
+    <a href="{{ path('app_incidencia_index') }}">Regresar</a>
 
-    <a href="{{ path('app_incidencia_index') }}">back to list</a>
-
-    <a href="{{ path('app_incidencia_edit', {'id': incidencium.id}) }}">edit</a>
-
-    {{ include('incidencia/_delete_form.html.twig') }}
 {% endblock %}

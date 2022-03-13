@@ -22,17 +22,14 @@
             </tr>
         </thead>
         <tbody>
-        {% for incidencium in incidencias %}
-            <tr>
-                <td>{{ incidencium.id }}</td>
-                <td>{{ incidencium.titulo }}</td>
-                <td>{{ incidencium.fecha ? incidencium.fecha|date('Y-m-d H:i:s') : '' }}</td>
-                <td>{{ incidencium.estado }}</td>
-{#                <td>#}
-{#                    <a href="{{ path('app_incidencia_show', {'id': incidencium.id}) }}">show</a>#}
-{#                    <a href="{{ path('app_incidencia_edit', {'id': incidencium.id}) }}">edit</a>#}
-{#                </td>#}
-            </tr>
+        {% for incidencium in incidencias|sort((a, b) => b.fecha <=> a.fecha) %}
+
+                <tr>
+                    <td> <a style="text-decoration: none; color: black" href="{{ path('app_incidencia_show', {'id': incidencium.id}) }}">{{ incidencium.id }}</a></td>
+                    <td> <a style="text-decoration: none; color: black" href="{{ path('app_incidencia_show', {'id': incidencium.id}) }}">{{ incidencium.titulo }}</a></td>
+                    <td> <a style="text-decoration: none; color: black" href="{{ path('app_incidencia_show', {'id': incidencium.id}) }}">{{ incidencium.fecha ? incidencium.fecha|date('Y-m-d H:i:s') : '' }}</a></td>
+                    <td> <a style="text-decoration: none; color: black" href="{{ path('app_incidencia_show', {'id': incidencium.id}) }}">{{ incidencium.estado }}</a></td>
+                </tr>
         {% else %}
             <tr>
                 <td colspan="5">no records found</td>
