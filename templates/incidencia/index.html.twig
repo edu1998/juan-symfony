@@ -38,6 +38,12 @@
         </tbody>
     </table>
     <br/>
+    {% for message in app.flashes('notice') %}
+        <div class="flash-notice">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <br/>
     <div>
         <button>
             <a style="text-decoration: none; color: black" href="{{ path('app_incidencia_new') }}"> Registrar incidencia </a>

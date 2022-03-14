@@ -6,7 +6,9 @@
 {% block body %}
     {{ include('layout/header/index.html.twig') }}
     <h1>Register</h1>
-    {{ form(registrationForm) }}
+    {{ form_start(registrationForm, {'attr': {'novalidate': 'novalidate'}}) }}
+        {{ form_widget(registrationForm) }}
+    {{ form_end(registrationForm) }}
     <div>
         <a href="login">
             <h4 style="color: blue">Login</h4>

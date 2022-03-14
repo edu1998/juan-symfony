@@ -36,6 +36,10 @@ class IncidenciaController extends AbstractController
             $incidencium->setFecha(new \DateTime());
             $incidencium->setUsuario($this->getCurrentUser());
             $incidenciaRepository->add($incidencium);
+            $this->addFlash(
+                'notice',
+                'Incidencia Agregada!'
+            );
             return $this->redirectToRoute('app_incidencia_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -58,6 +62,10 @@ class IncidenciaController extends AbstractController
             $incidencium->setUsuario($this->getCurrentUser());
             $incidencium->setCliente($cliente);
             $incidenciaRepository->add($incidencium);
+            $this->addFlash(
+                'notice',
+                'Incidencia Agregada!'
+            );
             return $this->redirectToRoute('cliente_detail', [ 'id' => $id_cliente ], Response::HTTP_SEE_OTHER);
         }
 
@@ -85,6 +93,10 @@ class IncidenciaController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $incidenciaRepository->add($incidencium);
+            $this->addFlash(
+                'notice',
+                'Incidencia Editada!'
+            );
             return $this->redirectToRoute('cliente_detail', ['id' => $id_cliente], Response::HTTP_SEE_OTHER);
         }
 

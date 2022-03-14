@@ -42,6 +42,10 @@ class ClienteController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()) {
             $clienteRepository->add($cliente);
+            $this->addFlash(
+                'notice',
+                'Cliente registrado!'
+            );
             return $this->redirectToRoute('cliente', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -56,6 +60,10 @@ class ClienteController extends AbstractController
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         if ($this->isCsrfTokenValid('delete'.$cliente->getId(), $request->request->get('_token'))) {
             $clienteRepository->remove($cliente);
+            $this->addFlash(
+                'notice',
+                'Cliente eliminado!'
+            );
         }
         return $this->redirectToRoute('cliente', [], Response::HTTP_SEE_OTHER);
     }

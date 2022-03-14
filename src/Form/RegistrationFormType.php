@@ -29,21 +29,21 @@ class RegistrationFormType extends AbstractType
             ->add('apellido', TextType::class,  [
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Porfavor ingrese un apellido',
+                        'message' => 'Por favor ingrese un apellido',
                     ]),
                 ]
             ])
             ->add('telefono', TextType::class,  [
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Porfavor ingrese un telefono',
+                        'message' => 'Por favor ingrese un telefono',
                     ]),
                 ]
             ])
             ->add('email', EmailType::class,  [
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Porfavor ingrese un emial',
+                        'message' => 'Por favor ingrese un email',
                     ]),
                 ]
             ])
@@ -53,7 +53,7 @@ class RegistrationFormType extends AbstractType
                         'message' => 'Por favor ingrese una contraseña',
                     ]),
                     new Length([
-                        'min' => 6,
+                        'min' => 5,
                         'minMessage' => 'Su contraseña debe tener al menos {{ limit }} caracteres',
                         // max length allowed by Symfony for security reasons
                         'max' => 4096,
