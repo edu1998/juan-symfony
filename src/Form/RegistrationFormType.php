@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -61,9 +62,14 @@ class RegistrationFormType extends AbstractType
                 ],
             ])
             ->add('foto', FileType::class, [
+                'mapped' => false,
                 'constraints' => [
-                    new NotBlank([
-                        'message' => 'Por favor sube una foto ',
+                    new File([
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                        ],
+                        'mimeTypesMessage' => 'Por favor subir una imagen valida',
                     ]),
                 ]
             ])

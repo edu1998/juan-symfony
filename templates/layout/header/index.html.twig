@@ -14,6 +14,11 @@
                 {{ name_user }}
             </div>
         {%  endif %}
+        {% if image_user is defined and image_user != ''  %}
+            <div>
+                <img style="width: 40px; height: 40px" src="{{ asset('uploads/user_images/' ~ image_user) }}">
+            </div>
+        {%  endif %}
     </div>
 </div>
 <br/><br/>

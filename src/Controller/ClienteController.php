@@ -29,7 +29,8 @@ class ClienteController extends AbstractController
 
         return $this->render('cliente/index.html.twig', [
             'clientes' => $clienteRepository->findAll(),
-            'name_user'       => $this->getNameUser()
+            'name_user'       => $this->getNameUser(),
+            'image_user'        => $this->getProfileImage()
         ]);
     }
 
@@ -51,6 +52,7 @@ class ClienteController extends AbstractController
 
         return $this->renderForm('cliente/registro.html.twig', [
             'name_user'  => $this->getNameUser(),
+            'image_user'        => $this->getProfileImage(),
             'registerForm'       => $form,
         ]);
     }
@@ -73,6 +75,7 @@ class ClienteController extends AbstractController
 
         return $this->render('cliente/detail.html.twig', [
             'name_user'  => $this->getNameUser(),
+            'image_user'        => $this->getProfileImage(),
             'cliente'    => $cliente
         ]);
     }
@@ -85,6 +88,18 @@ class ClienteController extends AbstractController
             $user = $this->getUser();
             if($user?->getId()) {
                 return $user->getNombre() . ' ' . $user->getApellido();
+            }
+        }
+        return '';
+    }
+
+    private function getProfileImage(): string {
+        if($this->getUser()) {
+            $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+            /** @var Usuario $user */
+            $user = $this->getUser();
+            if($user?->getId()) {
+                return $user->getFoto();
             }
         }
         return '';

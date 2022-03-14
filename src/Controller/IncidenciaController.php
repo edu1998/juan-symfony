@@ -21,6 +21,7 @@ class IncidenciaController extends AbstractController
     {
         return $this->render('incidencia/index.html.twig', [
             'name_user'  => $this->getNameUser(),
+            'image_user'        => $this->getProfileImage(),
             'incidencias' => $incidenciaRepository->findAll(),
         ]);
     }
@@ -45,6 +46,7 @@ class IncidenciaController extends AbstractController
 
         return $this->renderForm('incidencia/new.html.twig', [
             'name_user'  => $this->getNameUser(),
+            'image_user'        => $this->getProfileImage(),
             'form' => $form,
         ]);
     }
@@ -71,6 +73,7 @@ class IncidenciaController extends AbstractController
 
         return $this->renderForm('incidencia/new.html.twig', [
             'name_user'  => $this->getNameUser(),
+            'image_user'        => $this->getProfileImage(),
             'form' => $form,
             'client_id' => $id_cliente
         ]);
@@ -82,6 +85,7 @@ class IncidenciaController extends AbstractController
         return $this->render('incidencia/show.html.twig', [
             'incidencium' => $incidencium,
             'name_user'  => $this->getNameUser(),
+            'image_user'        => $this->getProfileImage(),
         ]);
     }
 
@@ -102,6 +106,7 @@ class IncidenciaController extends AbstractController
 
         return $this->renderForm('incidencia/edit.html.twig', [
             'name_user'  => $this->getNameUser(),
+            'image_user'        => $this->getProfileImage(),
             'incidencium' => $incidencium,
             'form' => $form,
         ]);
@@ -143,5 +148,17 @@ class IncidenciaController extends AbstractController
                return $user;
             }
         }
+    }
+
+    private function getProfileImage(): string {
+        if($this->getUser()) {
+            $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+            /** @var Usuario $user */
+            $user = $this->getUser();
+            if($user?->getId()) {
+                return $user->getFoto();
+            }
+        }
+        return '';
     }
 }
